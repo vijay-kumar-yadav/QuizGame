@@ -3,7 +3,7 @@ $(document).ready(() => {
         $("body").css("filter", "blur(8px)");
         setTimeout(() => {
             alert("Invalid Entry");
-            location.href = "./availableTest.html";
+            location.href = "./index.html";
         }, 1000);
     } else {
         sessionStorage.setItem("showResult", false);
@@ -105,5 +105,5 @@ function onHomeClick() {
     let resultArr = [];
     sessionStorage.setItem("resultShow", false);
     sessionStorage.clear();
-    location.href = "./availableTest.html";
+    location.href = "./index.html";
 }

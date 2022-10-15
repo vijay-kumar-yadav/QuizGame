@@ -79,7 +79,7 @@
           $("body").css("filter", "blur(3px)");
           setTimeout(() => {
             alert("Invalid Entry");
-            location.href = "./availableTest.html";
+            location.href = "./index.html";
           }, 1000);
         } else {
           sessionStorage.setItem("showResult", true);
@@ -330,7 +330,7 @@
         .then((data) => {
           if (data.response_code === 1) {
             alert("No test available");
-            location.href = "./availableTest.html";
+            location.href = "./index.html";
           }
           ques = convertApi(data).questions;
           totalQues = ques.length;
@@ -384,7 +384,7 @@
         for (let key in result) resultArr.push(result[key]);
         if (totalQues != quesNumber)
           sessionStorage.setItem("QuizName", resultArr);
-        location.href = "./availableTest.html";
+        location.href = "./index.html";
       }
       function onExitClick() {
         confirm_dialog(
