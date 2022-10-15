@@ -1,0 +1,30 @@
+.quesContent div {
+    
+    background-color: #0d1229;
+    color: aliceblue;
+    text-align: center;
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .counter span {
+    display: inline-block;
+    opacity: 0;
+    animation: anime 1s ease-in-out;
+  }
+  @keyframes anime {
+    0% {
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(1.5);
+    }
+    50% {
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(0.5);
+    }
+  }

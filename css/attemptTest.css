@@ -1,0 +1,89 @@
+.outer {
+    /* padding: 20vh; */
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: cadetblue;
+    overflow: hidden;
+  }
+
+  .middle {
+    display: table-cell;
+    vertical-align: middle;
+    /* background-color: aqua; */
+    width: min-content;
+    /* border: solid var(--lite); */
+  }
+  .heading {
+    text-align: center;
+    font-family: "Amatic SC", cursive;
+    color: var(--lite);
+  }
+  .inner {
+    background-color: var(--primaryBgTr);
+  }
+  body {
+    background-color: cadetblue;
+  }
+  label {
+    /* display: block; */
+    margin: 10px;
+  }
+  label.radio {
+    cursor: pointer;
+  }
+
+  label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  label.radio span {
+    padding: 4px;
+    border: 1px solid #00a8ff;
+    display: inline-block;
+    color: #00a8ff;
+    width: 150px;
+    height: fit-content;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 7px;
+    text-transform: uppercase;
+  }
+
+  label.radio input:checked + span {
+    border-color: #00a8ff;
+    background-color: #00a8ff;
+    color: #fff;
+  }
+
+  .ans {
+    margin-left: 36px !important;
+  }
+  .btnQuiz {
+    margin-top: 5px;
+    background-color: #00a8ff;
+    color: #fff;
+    border-radius: 0%;
+  }
+  .btnQuiz:hover {
+    color: #fff;
+  }
+  .quitSubmit {
+    visibility: hidden;
+  }
+  #timerDiv {
+    background-color: #fff;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    width: 50px;
+  }
+  #timerDiv h2 {
+    margin: 0px;
+  }

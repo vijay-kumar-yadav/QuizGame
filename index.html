@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Warning</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    body {
+      background-color: cadetblue;
+    }
+    /* body {
+   filter:blur(3px);
+   user-select:none ;
+} */
+    .outer {
+      /* padding: 20vh; */
+      display: table;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .middle {
+      display: table-cell;
+      vertical-align: middle;
+      width: min-content;
+    }
+    .inner {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #a1 {
+      margin-right: 1.5vw;
+    }
+
+    #a2 {
+      margin-left: 1.5vw;
+    }
+    .headText {
+      display: flex;
+      justify-content: center;
+    }
+    .animate-charcter {
+      text-transform: uppercase;
+      background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+      );
+      text-align: center;
+      background-size: auto auto;
+      background-clip: border-box;
+      background-size: 200% auto;
+      color: #fff;
+      background-clip: text;
+      /* text-fill-color: transparent; */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textclip 2s linear infinite;
+      display: inline-block;
+      font-size: 100px;
+    }
+
+    @keyframes textclip {
+      to {
+        background-position: 200%;
+      }
+    }
+    .imageTab {
+      width: 300px;
+      height: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .imageTab .content p {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      font-size: 1rem;
+      opacity: 0;
+      margin-bottom: -55px;
+      transition: all 0.25s ease;
+    }
+
+    .imageTab .content p button {
+      padding: 8px 18px;
+      border-radius: 10px;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      margin-left: auto;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .imageTab:hover .content p {
+      margin-bottom: 0;
+      opacity: 1;
+    }
+    .imageTab:hover img {
+      transform: scale(1.5);
+    }
+
+    .imageTab:after {
+      width: 100%;
+      content: "";
+      left: 0;
+      bottom: 0;
+      height: 150px;
+      position: absolute;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 100%
+      );
+      z-index: 20;
+      transition: all 0.25s ease;
+    }
+
+    .imageTab img {
+      height: 100%;
+      z-index: 10;
+      transition: all 0.25s ease;
+    }
+    .imageTab .content {
+      z-index: 30;
+      position: absolute;
+      bottom: 0;
+      color: #fff;
+      padding: 20px;
+      padding-bottom: 20px;
+    }
+    .imageTab .content p button:hover {
+      background: #fff;
+      color: #000;
+    }
+    /* h1 {
+      text-align: center;
+      text-transform: uppercase;
+      color: #fff;
+    } */
+  </style>
+  <body>
+    <div class="outer">
+      <div class="middle">
+        <!-- <h3 "> EKOSH</h3> -->
+        <div class="headText">
+          <h1 class="animate-charcter">Select</h1>
+        </div>
+        <div class="inner"></div>
+      </div>
+    </div>
+    <script>
+      function addImageTab(url, id, alt, name, about, btnName) {
+        var imageTabDiv = $("<div> </div>")
+          .attr("class", "imageTab")
+          .attr("id", id);
+        let imageEle = $("<img>").attr("src", url).attr("alt", alt);
+
+        let contentDiv = $("<div></div>").attr("class", "content");
+        let head = $("<h2></h2>").text(name);
+        let btn = $("<button></button").text(btnName);
+        let para = $("<p></p>").text(about);
+        para.append(btn);
+        contentDiv.append(head, para);
+        imageTabDiv.append(imageEle, contentDiv);
+        $(".inner").append(imageTabDiv);
+      }
+      var src = ["./image/giphy.gif", "./image/hangman.gif"];
+
+      var nameTopic = ["Quiz", "The Hangman"];
+      var btnName = ["Start", "Play"];
+      var content = [
+        "Multiple choice question for multiple topics",
+        "Guess Words related to topics like HTML, CSS & Javascript",
+      ];
+      for (let i = 0; i < 2; i++) {
+        addImageTab(
+          src[i],
+          "a" + (i + 1),
+          "alt" + i,
+          nameTopic[i],
+          content[i],
+          btnName[i]
+        );
+      }
+    </script>
+  </body>
+</html>

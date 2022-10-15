@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: cadetblue;
+  }
+  /* .allTestContainer {
+   
+  }*/
+  .testCard {
+    padding: 10px;
+  }
+  .testCards {
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+  }
+  .testCards:hover {
+    cursor: pointer;
+    box-shadow: 5px 10px 10px rgb(110, 109, 109);
+  }
+
+  /* .testCardsImg {
+    text-align: center;
+    position: relative;
+    width: fit-content;
+  } */
+  .testCardsImg img {
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+  } /*
+  .testCards {
+  
+  }
+  .testName {
+    display: flex;
+    width: fit-content;
+  }*/
+  #courseCode {
+    margin-top: 5px;
+    margin-bottom: 0px;
+  } /*
+  #duration {
+    margin-left: 170px;
+    font-weight: bold;
+    color: rgb(28, 23, 23);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  */
+  .startTest {
+    background-color: #00a8ff;
+    color: white;
+    padding: 10px 12px;
+    margin-bottom: 0;
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+  .quesContent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    /* border: 5px solid #ffff00; */
+    padding: 20px;
+  }
+  .counter {
+    font-size: 3em;
+  }
+
+  header {
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    color: #2dceb1;
+    border-bottom: 1px solid #2dceb1;
+    letter-spacing: 4px;
+    padding: 12px 0;
+    background: #fbfbfb;
+
+    border-bottom: 1px solid #fbfbfb;
+  }
+  header small {
+    font-size: large;
+  }
