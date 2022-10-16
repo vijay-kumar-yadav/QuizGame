@@ -5,11 +5,11 @@ body {
 
 
 
-  .heading {
+  /* .heading {
     text-align: center;
     font-family: "Amatic SC", cursive;
     color: var(--lite);
-  }
+  } */
 
   /* label {
     margin: 10px;
@@ -48,7 +48,7 @@ body {
   /* .ans {
     margin-left: 36px !important;
   } */
-  .btnQuiz {
+  /* .btnQuiz {
     margin-top: 5px;
     background-color: #00a8ff;
     color: #fff;
@@ -59,7 +59,7 @@ body {
   }
   .quitSubmit {
     visibility: hidden;
-  }
+  } */
  .timerPar{
     color: #004085;
     background: #cce5ff;

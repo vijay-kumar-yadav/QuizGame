@@ -82,14 +82,14 @@ $("#quesContainer").hide();
 var intr = 0;
 function countNum() {
     let e = document.querySelector(".counter");
-    let time = 5;
+    let time = 3;
     intr = setInterval(() => {
-        if (time == 0) {
+        if (time == -1) {
             document.location.href = "./attemptTest.html";
             clearInterval(intr);
         }
         e.innerHTML = `<span>${time}</span>`;
-        if (time == 1) {
+        if (time == 0) {
             e.innerHTML = `<span>Let's Go!</span>`;
         }
         time--;

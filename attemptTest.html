@@ -60,25 +60,18 @@
 
     <!-- confirmational model end -->
     <div class="alert" role="alert"></div>
-    <div class="quitSubmit">
-      <button class="ml-5 btn btnQuiz bg-primary" onclick="onSubmitClick()">
-        Submit
-      </button>
+    <!-- <div class="quitSubmit">
+     
       <button class="mr-5 btn btnQuiz bg-danger" onclick="onExitClick()">
         Quit
       </button>
-    </div>
+    </div> -->
     <div
       class="d-flex justify-content-center align-items-center"
       style="min-height: 95vh"
     >
       <div>
         <div id="quiz"></div>
-        <div class="d-flex justify-content-center quitSubmit">
-          <button class="btn btnQuiz bg-success" onclick="onNextClick()">
-            Next
-          </button>
-        </div>
       </div>
     </div>
     <script>
@@ -151,7 +144,8 @@
         quizDiv.append(quizNameDiv, progressBarDiv);
         var qaDiv = $("<div></div>")
           .attr("id", "quesAnsDiv" + questionNo)
-          .css("min-height", "50vh")
+          .css("min-height", "35vh")
+          .css("min-width", "80vw")
           .addClass(" p-3 border-bottom bg-white");
         var qDiv = $("<div></div>")
           .attr("id", "quesDiv")
@@ -164,7 +158,9 @@
           .addClass("mt-1 ml-2")
           .text(question);
         qDiv.append(quesSymbol, quesH);
-        var aDiv = $("<div></div>").attr("id", "ansDiv").addClass("row mx-2");
+        var aDiv = $("<div></div>")
+          .attr("id", "ansDiv")
+          .addClass("row mx-2 mt-5");
 
         for (let k = 0; k < options.length; k++) {
           var optionLbDiv = $("<div></div>").attr(
@@ -198,7 +194,27 @@
           optionLbDiv.append(optionlb);
           aDiv.append(optionLbDiv);
         }
-        qaDiv.append(qDiv, aDiv);
+        // <div class="d-flex justify-content-center quitSubmit">
+        //   <button class="btn btnQuiz bg-success" onclick="onNextClick()">
+        //     Next
+        //   </button>
+        // </div>
+        var nextBtnDiv = $("<div></div>").attr(
+          "class",
+          "d-flex justify-content-between"
+        );
+        var nextBtn = $("<button></button>")
+          .attr("class", " btn btn-success w-25")
+          .css("border-radius", "10px")
+          .click(() => onNextClick())
+          .text("Next");
+        var submitBtn = $("<button></button>")
+          .attr("class", " btn btn-primary w-25")
+          .css("border-radius", "10px")
+          .click(() => onSubmitClick())
+          .text("Submit");
+        nextBtnDiv.append(submitBtn, nextBtn);
+        qaDiv.append(qDiv, aDiv, nextBtnDiv);
         bDiv.append(quizDiv, qaDiv);
         $("#quiz").append(bDiv);
         // var nextButton = "";
