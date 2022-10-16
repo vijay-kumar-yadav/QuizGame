@@ -59,21 +59,24 @@
     </div>
 
     <!-- confirmational model end -->
-    <div class="outer">
-      <div class="alert" role="alert"></div>
-      <div class="middle head">
-        <div class="container inner">
-          <div id="quiz"></div>
-        </div>
+    <div class="alert" role="alert"></div>
+    <div class="quitSubmit">
+      <button class="ml-5 btn btnQuiz bg-primary" onclick="onSubmitClick()">
+        Submit
+      </button>
+      <button class="mr-5 btn btnQuiz bg-danger" onclick="onExitClick()">
+        Quit
+      </button>
+    </div>
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="min-height: 95vh"
+    >
+      <div>
+        <div id="quiz"></div>
         <div class="d-flex justify-content-center quitSubmit">
-          <button class="mr-5 btn btnQuiz bg-danger" onclick="onExitClick()">
-            Quit
-          </button>
           <button class="btn btnQuiz bg-success" onclick="onNextClick()">
             Next
-          </button>
-          <button class="ml-5 btn btnQuiz bg-primary" onclick="onSubmitClick()">
-            Submit
           </button>
         </div>
       </div>
@@ -133,30 +136,50 @@
         quizDiv.append(quizNameDiv);
         var qaDiv = $("<div></div>")
           .attr("id", "quesAnsDiv" + questionNo)
-          .addClass("bg-white p-3 border-bottom");
+          .css("min-height", "50vh")
+          .addClass(" p-3 border-bottom bg-white");
         var qDiv = $("<div></div>")
           .attr("id", "quesDiv")
-          .addClass("d-flex flex-row align-items-center question-title");
+          .addClass("d-flex flex-row  align-items-center question-title");
         var quesSymbol = $("<h3></h3>").addClass("text-danger").text("Q.");
         var quesH = $("<H5></H5>")
           .attr("id", "ques" + questionNo)
           .addClass("mt-1 ml-2")
           .text(question);
         qDiv.append(quesSymbol, quesH);
-        var aDiv = $("<div></div>").attr("id", "ansDiv").addClass("ans ml-2");
+        var aDiv = $("<div></div>").attr("id", "ansDiv").addClass("row mx-2");
+
         for (let k = 0; k < options.length; k++) {
-          var lb = $("<label></label>").addClass("radio");
+          var optionLbDiv = $("<div></div>").attr(
+            "class",
+            " col-md-6 col-sm-12 p-1"
+          );
+          var optionlb = $("<label></label>")
+            .addClass(" btn btn-outline-primary w-100")
+            .attr("id", "optionlb" + k);
           var aI = $("<input/>")
             .attr("name", questionNo)
             .attr("type", "radio")
-            .attr("value", k);
+            .attr("value", k)
+            .attr("id", "input" + k)
+            .css("visibility", "hidden");
 
           aI.change((event) => {
+            console.log("clicked");
+            for (let i = 0; i < options.length; i++) {
+              $("#optionlb" + i).removeClass("btn-primary");
+              $("#optionlb" + i).addClass("btn-outline-primary");
+            }
+            $("#optionlb" + k).addClass("btn-primary");
+            $("#optionlb" + k).removeClass("btn-outline-primary");
+
             result[questionNo] = event.target.value;
           });
+
           var optionSpan = $("<span></span>").text(options[k]);
-          lb.append(aI, optionSpan);
-          aDiv.append(lb);
+          optionlb.append(aI, optionSpan);
+          optionLbDiv.append(optionlb);
+          aDiv.append(optionLbDiv);
         }
         qaDiv.append(qDiv, aDiv);
         bDiv.append(quizDiv, qaDiv);

@@ -1,35 +1,17 @@
-.outer {
-    /* padding: 20vh; */
-    display: table;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: cadetblue;
-    overflow: hidden;
-  }
+body {
+  background-color: cadetblue;
+  overflow: hidden;
+}
 
-  .middle {
-    display: table-cell;
-    vertical-align: middle;
-    /* background-color: aqua; */
-    width: min-content;
-    /* border: solid var(--lite); */
-  }
+
+
   .heading {
     text-align: center;
     font-family: "Amatic SC", cursive;
     color: var(--lite);
   }
-  .inner {
-    background-color: var(--primaryBgTr);
-  }
-  body {
-    background-color: cadetblue;
-  }
-  label {
-    /* display: block; */
+
+  /* label {
     margin: 10px;
   }
   label.radio {
@@ -55,17 +37,17 @@
     border-radius: 3px;
     margin-top: 7px;
     text-transform: uppercase;
-  }
-
-  label.radio input:checked + span {
+  } */
+/* 
+  label.optionDiv input:checked + label {
     border-color: #00a8ff;
     background-color: #00a8ff;
     color: #fff;
-  }
+  } */
 
-  .ans {
+  /* .ans {
     margin-left: 36px !important;
-  }
+  } */
   .btnQuiz {
     margin-top: 5px;
     background-color: #00a8ff;
@@ -91,3 +73,4 @@
   #timerDiv h2 {
     margin: 0px;
   }
+ 
