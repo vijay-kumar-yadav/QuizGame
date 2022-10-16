@@ -110,11 +110,18 @@
       // console.log(mcq);
       function quesSkeleton(questionNo, question, options) {
         // opt=option
-        var tDivParent = $("<div></div>").attr("class", "timerDivParent");
-        var tDiv = $("<div></div>").attr("id", "timerDiv");
-        var tP = $("<h2></h2>").attr("id", "timer").addClass("text-center");
-        tDiv.append(tP);
-        tDivParent.append(tDiv);
+        // <div class="timer">
+        //         <div class="time_left_txt">Time Left</div>
+        //         <div class="timer_sec">15</div>
+        //     </div>
+        var tDivParent = $("<div></div>").attr("class", "timerPar");
+        var tDivText = $("<div></div>")
+          .attr("class", "time_left_txt")
+          .text("Time Left");
+        var tP = $("<div></div>").attr("id", "timer").addClass("text-center");
+        tDivParent.append(tDivText, tP);
+        // tDiv.append(tP);
+        // tDivParent.append(tDiv);
         var bDiv = $("<div></div")
           .addClass("border")
           .attr("id", "border" + questionNo);
@@ -129,11 +136,19 @@
         );
         var nameOfQuiz = sessionStorage.getItem("QuizName");
         var quizNameH = $("<h4></h4>").text(nameOfQuiz + " Quiz");
-        var quizNumberSpan = $("<span></span>").text(
-          questionNo + 1 + " of " + totalQues
-        );
-        quizNameDiv.append(quizNameH, quizNumberSpan);
-        quizDiv.append(quizNameDiv);
+        // var quizNumberSpan = $("<span></span>").text(
+        //   questionNo + 1 + " of " + totalQues
+        // );
+
+        var progressBarDiv = $("<div></div>").attr("class", "progress mt-2");
+        var progressBar = $("<div></div>")
+          .attr("class", "progress-bar bg-primary ")
+          .attr("role", "progressbar")
+          .css("width", "100%");
+        progressBarDiv.append(progressBar);
+        //progress bar end
+        quizNameDiv.append(quizNameH, tDivParent);
+        quizDiv.append(quizNameDiv, progressBarDiv);
         var qaDiv = $("<div></div>")
           .attr("id", "quesAnsDiv" + questionNo)
           .css("min-height", "50vh")
@@ -141,7 +156,9 @@
         var qDiv = $("<div></div>")
           .attr("id", "quesDiv")
           .addClass("d-flex flex-row  align-items-center question-title");
-        var quesSymbol = $("<h3></h3>").addClass("text-danger").text("Q.");
+        var quesSymbol = $("<h3></h3>")
+          .addClass("text-danger")
+          .text("Q" + (questionNo + 1) + ".");
         var quesH = $("<H5></H5>")
           .attr("id", "ques" + questionNo)
           .addClass("mt-1 ml-2")
@@ -183,7 +200,7 @@
         }
         qaDiv.append(qDiv, aDiv);
         bDiv.append(quizDiv, qaDiv);
-        $("#quiz").append(tDivParent, bDiv);
+        $("#quiz").append(bDiv);
         // var nextButton = "";
         // if (questionNo != totalQues - 1) {
         //   nextButton = $("<button></button>")
@@ -207,7 +224,6 @@
       var count = timeBTWques;
       var quesNumber = 0;
       var ques = 0;
-      function displayTimer() {}
       function start(ques) {
         // console.log(ques);
         quesSkeleton(
@@ -297,6 +313,14 @@
           }
         }
         $("#timer").text(count);
+        let progress = Math.trunc((count / 30) * 100);
+        // console.log(progress);
+        $(".progress-bar").css("width", "" + progress + "%");
+        if (progress > 25 && progress <= 50)
+          $(".progress-bar").addClass("bg-warning");
+
+        if (progress <= 25) $(".progress-bar").addClass("bg-danger");
+
         count--;
       }
       //on next click
