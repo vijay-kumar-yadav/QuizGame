@@ -1,10 +1,21 @@
-body {
-  background-color: cadetblue;
-  overflow: hidden;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
 
 
+body{
+  background-color: cadetblue;
 
+  overflow: hidden;
+}
+
+/* .border{
+  transition: visibility  5s ,opacity 5s linear;
+} */
   /* .heading {
     text-align: center;
     font-family: "Amatic SC", cursive;
@@ -92,3 +103,8 @@ body {
     border: 1px solid #343a40;
     user-select: none;
 }
+.progress-bar{
+  transition: width 1s linear;
+}
+
+

@@ -23,13 +23,13 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     var answerAttempted = sessionStorage
         .getItem("answerAttempted")
         .split(",");
-    console.log(correctIndex, answerAttempted[questionNo]);
+    // console.log(correctIndex, answerAttempted[questionNo]);
     $("#result").attr("class", "container");
-    var tDiv = $("<div></div>").attr("id", "timerDiv");
-    var tP = $("<h2></h2>").attr("id", "timer").addClass(" text-center");
-    tDiv.append(tP);
+    // var tDiv = $("<div></div>").attr("id", "timerDiv");
+    // var tP = $("<h2></h2>").attr("id", "timer").addClass(" text-center");
+    // tDiv.append(tP);
     var bDiv = $("<div></div")
-        .addClass("border")
+        .addClass("border hidden")
         .attr("id", "border" + questionNo);
     var bgColor = "bg-info";
     if (answerAttempted[questionNo] == correctIndex) {
@@ -54,10 +54,10 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     if (points == 0) {
         quizNameH.text(" Answer: " + options[correctIndex]);
     }
-    var quizNumberSpan = $("<span></span>").text(
-        questionNo + 1 + " of " + totalQues
-    );
-    quizNameDiv.append(quizNameH, quizNumberSpan);
+    // var quizNumberSpan = $("<span></span>").text(
+    //     questionNo + 1 + " of " + totalQues
+    // );
+    quizNameDiv.append(quizNameH);
     quizDiv.append(quizNameDiv);
     var qaDiv = $("<div></div>")
         .attr("id", "quesAnsDiv" + questionNo)
@@ -65,7 +65,7 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     var qDiv = $("<div></div>")
         .attr("id", "quesDiv")
         .addClass("d-flex flex-row align-items-center question-title");
-    var quesSymbol = $("<h3></h3>").addClass("text-danger").text("Q.");
+    var quesSymbol = $("<h3></h3>").addClass("text-danger").text("Q" + (questionNo + 1) + ".");
     // console.log(question);
     var quesH = $("<H5></H5>")
         .attr("id", "ques" + questionNo)
@@ -90,13 +90,13 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     }
     qaDiv.append(qDiv, aDiv);
     bDiv.append(quizDiv, qaDiv);
-    $("#result").append(tDiv, bDiv);
+    $("#result").append(bDiv);
 
 }
 let mcq = JSON.parse(sessionStorage.getItem("mcq"));
 var totalQues = mcq.questions.length;
 mcq = mcq.questions;
-console.log(mcq);
+// console.log(mcq);
 
 for (let i = 0; i < totalQues; i++) {
     quesSkeleton(i, mcq[i].question, mcq[i].answers, mcq[i].correctIndex);
@@ -107,3 +107,21 @@ function onHomeClick() {
     sessionStorage.clear();
     location.href = "./index.html";
 }
+
+
+//scroll animation
+// console.log("hi");
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        // console.log(entry);
+        if (entry.isIntersecting) {
+            console.log("inside");
+            entry.target.classList.add("show");
+        } else {
+            entry.target.classList.remove("show");
+        }
+    });
+});
+
+const hiddenElements = document.querySelectorAll(".hidden");
+hiddenElements.forEach((el, i) => { observer.observe(el) });

@@ -1,6 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: cadetblue;
+    overflow-x: hidden;
   }
   /* .allTestContainer {
    
@@ -76,6 +77,7 @@ body {
 
   header {
     position: relative;
+    
     text-align: center;
     text-transform: uppercase;
     color: #2dceb1;
@@ -88,4 +90,16 @@ body {
   }
   header small {
     font-size: large;
+  }
+
+  .hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100%);
+    transition: all 1s;
+  }
+  .show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
   }
