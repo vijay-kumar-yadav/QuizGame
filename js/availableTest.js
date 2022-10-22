@@ -91,7 +91,8 @@ function testCardSkeleton(id, Name) {
         $("#save").click(() => {
             let b = $("input[name='question']:checked").val();
             if (isNaN(Number(b))) {
-                $(".modal").effect("shake", { times: 4 }, 1000);
+                // $(".modal").effect("shake", { times: 4 }, 1000);
+                return
             } else {
                 sessionStorage.setItem("numberOfQuestion", Number(b))
 
