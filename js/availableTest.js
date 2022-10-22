@@ -86,10 +86,20 @@ function testCardSkeleton(id, Name) {
         .attr("id", "startTest" + id)
         .addClass("startTest")
         .text("Start Quiz");
+
     startTestBtn.click(() => {
         $("#numberOfQuestionTitle").text(Name);
+        $("input").click(() => {
+            var id = $("input[name='question']:checked").attr("id");
+            for (let e of ['a', 'b', 'c', 'd'])
+                if (e != id) { $("." + e).removeClass("bg-primary").css("color", "#fa4134"); }
+
+            $("." + id).addClass("bg-primary").css("color", "white");
+        })
+
         $("#save").click(() => {
             let b = $("input[name='question']:checked").val();
+            console.log(b)
             if (isNaN(Number(b))) {
                 // $(".modal").effect("shake", { times: 4 }, 1000);
                 return
@@ -101,6 +111,7 @@ function testCardSkeleton(id, Name) {
         }
         )
     });
+
     testCardsImg.append(img_avatar);
     testName.append(courseCode);
     testCardsBody.append(testCardsImg, testName);

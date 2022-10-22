@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  overflow-x : hidden;
+  overflow : hidden;
 }
 body {
     background-color: cadetblue;
@@ -119,3 +119,31 @@ body {
     z-index:1;
   }
   
+  /* set popup  */
+ .modal-header{
+color: #fa4134;
+text-transform:uppercase;
+ }
+ 
+ .modal-body{
+
+   color: #fa4134;
+  }
+  .popupQuestion{
+    text-align: center;
+  }
+  .popupQuestion input{
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+ .popupQuestion label{
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  border: solid 1px;
+  border-color: #2dceb1;
+  border-radius: 5px;
+ }
+
+

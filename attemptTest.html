@@ -84,7 +84,11 @@
       style="min-height: 100vh"
     >
       <div>
-        <div id="quiz"></div>
+        <div id="quiz">
+          <div class="spinner-grow" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </div>
     </div>
     <script>
@@ -300,6 +304,7 @@
       function submitQuizResult() {
         // console.log("your result", result);
         $(".quitSubmit").remove();
+        $("header").hide();
         let resultArr = [];
         for (let key in result) resultArr.push(result[key]);
         var correctAnswers = [];
@@ -441,6 +446,7 @@
             alert("No test available");
             location.href = "./index.html";
           }
+          $(".spinner-grow").hide();
           ques = convertApi(data).questions;
           totalQues = ques.length;
           sessionStorage.setItem("totalQues", totalQues);

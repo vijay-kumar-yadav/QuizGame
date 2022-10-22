@@ -155,7 +155,9 @@ function pdfDown() {
         // background: 'simple text',
         // a string or { width: number, height: number }
         pageSize: 'A4',
-
+        info: {
+            title: "" + quizName
+        },
         content: [
             { text: quizName, style: "header" }
         ],
@@ -192,5 +194,5 @@ function pdfDown() {
 
     }
     // console.log(dd.content);
-    pdfMake.createPdf(dd).download();
+    pdfMake.createPdf(dd).download('' + quizName + "QuizResult");
 }
