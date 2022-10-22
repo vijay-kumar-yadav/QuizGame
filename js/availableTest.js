@@ -81,11 +81,25 @@ function testCardSkeleton(id, Name) {
         .attr("id", "courseCode")
         .text(Name)
         .addClass("text-center");
-    var startTestBtn = $("<button></button>")
+    var startTestBtn = $("<button></button>").attr("data-toggle", "modal")
+        .attr("data-target", "#numberOfQuestion")
         .attr("id", "startTest" + id)
         .addClass("startTest")
         .text("Start Quiz");
-    startTestBtn.click(() => startCountDown(id, Name));
+    startTestBtn.click(() => {
+        $("#numberOfQuestionTitle").text(Name);
+        $("#save").click(() => {
+            let b = $("input[name='question']:checked").val();
+            if (isNaN(Number(b))) {
+                $(".modal").effect("shake", { times: 4 }, 1000);
+            } else {
+                sessionStorage.setItem("numberOfQuestion", Number(b))
+
+                startCountDown(id, Name);
+            };
+        }
+        )
+    });
     testCardsImg.append(img_avatar);
     testName.append(courseCode);
     testCardsBody.append(testCardsImg, testName);

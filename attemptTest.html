@@ -61,12 +61,24 @@
     <!-- confirmational model end -->
     <!-- <div class="quitSubmit">
       
-      <button class="mr-5 btn btnQuiz bg-danger" onclick="onExitClick()">
-        Quit
-      </button>
     </div> -->
     <div class="alert" role="alert"></div>
+    <header>
+      <img
+        alt="quit"
+        class="quitBtn"
+        src="./quit.png"
+        onclick="onExitClick()"
+      />
 
+      <small>Quiz</small>
+      <img
+        alt="fullscreen"
+        class="fullscreenToggleBtn"
+        src="./fullscreen.png"
+        onclick="onRequestFullScreenClick()"
+      />
+    </header>
     <div
       class="d-flex justify-content-center align-items-center"
       style="min-height: 100vh"
@@ -89,7 +101,7 @@
       });
 
       var result = {};
-      var amount = "10";
+      var amount = "" + sessionStorage.getItem("numberOfQuestion");
       var difficulty = "easy";
       var testType = sessionStorage.getItem("TestType");
       // https://opentdb.com/api.php?amount=10&category=24&difficulty=medium&type=multiple
@@ -497,6 +509,41 @@
           "onSubmit"
         );
       }
+      function onRequestFullScreenClick() {
+        if (
+          (document.fullScreenElement && document.fullScreenElement !== null) ||
+          (!document.mozFullScreen && !document.webkitIsFullScreen)
+        ) {
+          if (document.documentElement.requestFullScreen) {
+            document.documentElement.requestFullScreen();
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(
+              Element.ALLOW_KEYBOARD_INPUT
+            );
+          }
+        } else {
+          if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+          }
+        }
+      }
+
+      window.addEventListener("resize", (evt) => {
+        if (window.innerHeight == screen.height) {
+          $(".fullscreenToggleBtn").attr("src", "./fullscreen_off.png");
+
+          console.log("FULL SCREEN");
+        } else {
+          $(".fullscreenToggleBtn").attr("src", "./fullscreen.png");
+          console.log("NORMAL SCREEN");
+        }
+      });
     </script>
   </body>
 </html>

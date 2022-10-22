@@ -9,12 +9,30 @@ $(document).ready(() => {
         sessionStorage.setItem("showResult", false);
     }
 });
-$("#MarksObtained").text(
-    isNaN(sessionStorage.getItem("YourScore"))
-        ? 0
-        : sessionStorage.getItem("YourScore")
-);
-$("#MarksMax").text(sessionStorage.getItem("totalQues"));
+function getMarks() {
+    let totalMarks = sessionStorage.getItem("totalQues");
+    let obtainedMarks = sessionStorage.getItem("YourScore");
+    let lowMarks = Math.trunc(obtainedMarks * 0.2)
+    let mediumMarks = Math.trunc(obtainedMarks * 0.6);
+    // let highMarks = Math.trunc(obtainedMarks * .7);
+
+    if (isNaN(obtainedMarks) || obtainedMarks == 0) {
+        obtainedMarks = 0;
+        $("#MarksObtained").addClass("text-danger");
+    } else if (obtainedMarks == lowMarks) {
+        $("#MarksObtained").addClass("text-danger");
+    } else if (obtainedMarks > lowMarks && obtainedMarks <= mediumMarks) {
+        $("#MarksObtained").addClass("text-warning");
+    } else {
+        $("#MarksObtained").addClass("text-success");
+    }
+
+
+
+    return obtainedMarks;
+}
+$("#MarksObtained").text(() => getMarks());
+$("#MarksMax").text(sessionStorage.getItem("totalQues")).addClass("text-white");
 
 //answer attempted
 function quesSkeleton(questionNo, question, options, correctIndex) {
@@ -30,7 +48,7 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     // tDiv.append(tP);
     var bDiv = $("<div></div")
         .addClass("border hidden")
-        .attr("id", "border" + questionNo);
+        .attr("id", "border" + questionNo).css("border-top-right-radius", "50px");
     var bgColor = "bg-info";
     if (answerAttempted[questionNo] == correctIndex) {
         bgColor = "bg-success";
@@ -45,14 +63,14 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
     var quizDiv = $("<div></div>").attr(
         "class",
         "  p-3 border-bottom " + bgColor
-    );
+    ).css("border-top-right-radius", "50px");
     var quizNameDiv = $("<div></div>").attr(
         "class",
         "d-flex flex-row justify-content-between align-items-center"
     );
-    var quizNameH = $("<h4></h4>").text("Marks: " + points);
+    var quizNameH = $("<h4></h4>").text("Marks: " + points).addClass("text-white");
     if (points == 0) {
-        quizNameH.text(" Answer: " + options[correctIndex]);
+        quizNameH.text(" Answer: " + options[correctIndex]).addClass("text-white");
     }
     // var quizNumberSpan = $("<span></span>").text(
     //     questionNo + 1 + " of " + totalQues
@@ -125,3 +143,54 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((el, i) => { observer.observe(el) });
+
+
+function pdfDown() {
+    let answerAttempted = sessionStorage
+        .getItem("answerAttempted")
+        .split(",");
+    let quizName = sessionStorage.getItem("QuizName");
+    var dd = {
+        // watermark: 'Quiz Results',
+        // background: 'simple text',
+        // a string or { width: number, height: number }
+        pageSize: 'A4',
+
+        content: [
+            { text: quizName, style: "header" }
+        ],
+        styles: {
+            header: {
+                fontSize: 18,
+                bold: true,
+            },
+            subheader: {
+                fontSize: 15,
+                bold: true,
+            },
+            quote: {
+                italics: true,
+            },
+            small: {
+                fontSize: 8,
+            },
+        },
+    };
+    let i = 1;
+
+    for (let t of mcq) {
+        let yourAns = t.answers[answerAttempted[i - 1]];
+        console.log(answerAttempted[i - 1])
+        dd.content.push(
+            {
+                text: "Q" + i + ": " + t.question,
+                style: "subheader",
+            },
+            "Correct Ans: " + t.answers[t.correctIndex] + "\n" + "Your Ans: " + (answerAttempted[i - 1] != 4 ? yourAns : "") + "\n\n"
+        );
+        i++;
+
+    }
+    // console.log(dd.content);
+    pdfMake.createPdf(dd).download();
+}

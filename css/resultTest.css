@@ -42,15 +42,7 @@ label {
     padding: 5px;
     /* background-color: black; */
   }
-  .btnHome {
-    margin-top: 5px;
-    background-color: #00a8ff;
-    color: #fff;
-    border-radius: 0%;
-  }
-  .btnHome:hover {
-    color: #fff;
-  }
+ 
 .border{
   margin-bottom: 10px;
 }
@@ -67,20 +59,56 @@ label {
   transform: translateX(0);
 }
 /* heading */
+
 header {
-  position: relative;
   
-  text-align: center;
   text-transform: uppercase;
   color: #2dceb1;
-  border-bottom: 1px solid #2dceb1;
   letter-spacing: 4px;
-  padding: 12px 0;
-  background: #fbfbfb;
 
+ display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #2dceb1;
+  background: #fbfbfb;
+padding: 5px 10px 5px 10px;
   border-bottom: 1px solid #fbfbfb;
 }
 header small {
-  font-size: 25px;
+  font-size: large;
+}
+.pdfFile
+{
+  height: 30px; width: 30px;
+  /* border: 2px solid #b9b5b5; */
+cursor: pointer;
+  
 
+}
+/* .fullscreenToggleBtn:hover{
+  height: 35px; width: 35px;
+  transition: all  linear;
+} */
+.quitBtn{
+  height: 30px; width: 30px;
+cursor: pointer;
+  /* border: 2px solid #b9b5b5; */
+
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:1;
+}
+
+.obtainedMarksDiv {
+  display: flex;
+  justify-content: center;
+}
+.obtainedMarksDiv div{
+  background-color:rgb(216, 186, 129);
+  border-radius: 10px;
+  
+  padding: 5px;
 }

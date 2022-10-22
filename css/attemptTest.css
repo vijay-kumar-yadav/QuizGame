@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+  overflow: hidden;
 }
 
 
@@ -108,3 +108,36 @@ body{
 }
 
 
+header {
+  text-transform: uppercase;
+  color: #2dceb1;
+  letter-spacing: 4px;
+
+ display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #2dceb1;
+  background: #fbfbfb;
+padding: 5px 10px 5px 10px;
+  border-bottom: 1px solid #fbfbfb;
+}
+header small {
+  font-size: large;
+}
+.fullscreenToggleBtn
+{
+  height: 30px; width: 30px;
+  /* border: 2px solid #b9b5b5; */
+cursor: pointer;
+  
+
+}
+/* .fullscreenToggleBtn:hover{
+  height: 35px; width: 35px;
+  transition: all  linear;
+} */
+.quitBtn{
+  height: 30px; width: 30px;
+cursor: pointer;
+  /* border: 2px solid #b9b5b5; */
+
+}

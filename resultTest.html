@@ -12,6 +12,14 @@
     />
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- text to pdf  -->
+    <!-- pdfmake files: -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js"></script>
+    <!-- html-to-pdfmake file: -->
+    <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/browser.js"></script>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -22,26 +30,39 @@
     <link rel="stylesheet" href="./css/resultTest.css" />
   </head>
   <body>
-    <header>
-      <small>result </small>
+    <header class="sticky">
+      <img
+        alt="quit"
+        class="quitBtn"
+        src="./quit.png"
+        onclick="onHomeClick()"
+      />
+
+      <small>Result</small>
+      <!-- <a href="path_to_file" download="result" id="resultSave"> -->
+      <img
+        title="Export Result as PDF"
+        alt="fullscreen"
+        class="pdfFile"
+        src="./pdf-file.png"
+        onclick="pdfDown()"
+      />
+      <!-- </a> -->
     </header>
 
-    <div style="text-align: center">
-      <!-- <div>Marks</div> -->
-      <div>
-        <span
-          id="MarksObtained"
-          style="font-size: 60px; font-weight: bold"
-        ></span
-        ><sub style="font-size: 40px">/<span id="MarksMax"></span></sub>
+    <div style="text-align: center; margin-top: 50px">
+      <!-- <div class="text-white h3">Marks</div> -->
+      <div class="obtainedMarksDiv">
+        <div class="hidden">
+          <span
+            id="MarksObtained"
+            style="font-size: 55px; font-weight: bold"
+          ></span
+          ><sub style="font-size: 40px">/<span id="MarksMax"></span></sub>
+        </div>
       </div>
     </div>
     <div id="result"></div>
-    <div class="text-center">
-      <button class="mb-2 btn btnHome bg-danger w-25" onclick="onHomeClick()">
-        Home
-      </button>
-    </div>
 
     <script src="./js/resultTest.js"></script>
   </body>
