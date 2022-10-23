@@ -3,18 +3,25 @@
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  overflow : hidden;
+  overflow-x: hidden;
 }
 body {
-    background-color: cadetblue;
+  background-color: cadetblue;
+  overflow-x : hidden;
+  
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
   }
+
+
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
   /* .allTestContainer {
    
   }*/
-  .space{
-    margin-bottom: 50px;
 
-  }
   .testCard {
     padding: 10px;
   }
@@ -120,14 +127,14 @@ body {
   }
   
   /* set popup  */
+ 
  .modal-header{
-color: #fa4134;
+color: #2dceb1;
 text-transform:uppercase;
  }
  
  .modal-body{
-
-   color: #fa4134;
+   color: #0f1f9d;
   }
   .popupQuestion{
     text-align: center;
@@ -138,12 +145,26 @@ text-transform:uppercase;
     pointer-events: none;
   }
  .popupQuestion label{
+
+  overflow: hidden;
+
   cursor: pointer;
-  padding: 10px;
+  padding: 3px;
+width: 30px;
+height: 30px;
   margin: 10px;
   border: solid 1px;
-  border-color: #2dceb1;
+  border-color: #0f1f9d;
   border-radius: 5px;
  }
+ .popupQuestion label:hover{
+  border: solid 2px;
+  border-color: #0f1f9d;
+  border-radius: 5px;
 
+  
+ }
 
+.spinner-grow{
+  position: absolute;
+}

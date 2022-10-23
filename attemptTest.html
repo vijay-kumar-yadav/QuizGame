@@ -62,7 +62,6 @@
     <!-- <div class="quitSubmit">
       
     </div> -->
-    <div class="alert" role="alert"></div>
     <header>
       <img
         alt="quit"
@@ -79,16 +78,13 @@
         onclick="onRequestFullScreenClick()"
       />
     </header>
+    <!-- <div class="alert" role="alert"></div> -->
     <div
-      class="d-flex justify-content-center align-items-center"
+      class="d-flex justify-content-center align-items-center testSlideshow"
       style="min-height: 100vh"
     >
       <div>
-        <div id="quiz">
-          <div class="spinner-grow" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
+        <div id="quiz"></div>
       </div>
     </div>
     <script>
@@ -105,18 +101,18 @@
       });
 
       var result = {};
-      var amount = "" + sessionStorage.getItem("numberOfQuestion");
-      var difficulty = "easy";
-      var testType = sessionStorage.getItem("TestType");
+      // var amount = "" + sessionStorage.getItem("numberOfQuestion");
+      // var difficulty = "easy";
+      // var testType = sessionStorage.getItem("TestType");
       // https://opentdb.com/api.php?amount=10&category=24&difficulty=medium&type=multiple
-      let mcq =
-        "https://opentdb.com/api.php?amount=" +
-        amount +
-        "&category=" +
-        testType +
-        "&difficulty=" +
-        difficulty +
-        "&type=multiple";
+      // let mcq =
+      //   "https://opentdb.com/api.php?amount=" +
+      //   amount +
+      //   "&category=" +
+      //   testType +
+      //   "&difficulty=" +
+      //   difficulty +
+      //   "&type=multiple";
       // console.log(mcq);
       function quesSkeleton(questionNo, question, options) {
         // opt=option
@@ -234,19 +230,6 @@
         qaDiv.append(qDiv, aDiv, nextBtnDiv);
         bDiv.append(quizDiv, qaDiv);
         $("#quiz").append(bDiv);
-        // var nextButton = "";
-        // if (questionNo != totalQues - 1) {
-        //   nextButton = $("<button></button>")
-        //     .attr("id", "next" + questionNo)
-        //     .text("Next");
-        // }
-        //qP = ques para
-        //aI = answer Input
-        //lb = label
-        //tP = timerPara
-        //qaDiv = questionAnswerDiv
-        //qDiv = questionDiv
-        //aDiv = answerDiv
       }
       //slideshow
       var intr;
@@ -324,9 +307,9 @@
         $(".alert").addClass("alert-primary");
 
         alertMessage("Calculating your result wait", 2800);
-        setTimeout(() => {
-          location.href = "./resultTest.html";
-        }, 3000);
+        location.href = "./resultTest.html";
+        // setTimeout(() => {
+        // }, 3000);
       }
       function startSlideshow(ques) {
         if (count == 0) {
@@ -439,32 +422,28 @@
         console.log(JSON.parse(sessionStorage.mcq));
         return myResponse;
       }
-      fetch(mcq)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.response_code === 1) {
-            alert("No test available");
-            location.href = "./index.html";
-          }
-          $(".spinner-grow").hide();
-          ques = convertApi(data).questions;
-          totalQues = ques.length;
-          sessionStorage.setItem("totalQues", totalQues);
-          totalTime = totalQues * perQuesTime;
-          // let tempArr = [];
-          let maxOptions = 0;
-          for (let i = 0; i < totalQues; i++) {
-            maxOptions = Math.max(maxOptions, ques[i].answers.length);
-          }
-          // console.log(maxOptions);
-          for (let i = 0; i < totalQues; i++) {
-            result[i] = maxOptions;
-            // tempArr[i] = maxOptions;
-          }
-          // sessionStorage.setItem("QuizName", tempArr);
-          $(".quitSubmit").css("visibility", "visible");
-          start(ques);
-        });
+      function getFetchMcq() {
+        const data = JSON.parse(sessionStorage.getItem("mcqData"));
+        console.log(data);
+        ques = convertApi(data).questions;
+        totalQues = ques.length;
+        sessionStorage.setItem("totalQues", totalQues);
+        totalTime = totalQues * perQuesTime;
+        // let tempArr = [];
+        let maxOptions = 0;
+        for (let i = 0; i < totalQues; i++) {
+          maxOptions = Math.max(maxOptions, ques[i].answers.length);
+        }
+        // console.log(maxOptions);
+        for (let i = 0; i < totalQues; i++) {
+          result[i] = maxOptions;
+          // tempArr[i] = maxOptions;
+        }
+        // sessionStorage.setItem("QuizName", tempArr);
+        $(".quitSubmit").css("visibility", "visible");
+        start(ques);
+      }
+      getFetchMcq();
       function onSubmit() {
         sessionStorage.setItem("resultShow", true);
         sessionStorage.setItem("TestStart", false);
@@ -486,9 +465,9 @@
         $("#quiz").hide();
         $(".alert").addClass("alert-primary");
         alertMessage("Calculating your result wait", 2800);
-        setTimeout(() => {
-          location.href = "./resultTest.html";
-        }, 3000);
+        location.href = "./resultTest.html";
+        // setTimeout(() => {
+        // }, 3000);
       }
       function onExit() {
         $(".quitSubmit").css("visibility", "hidden");

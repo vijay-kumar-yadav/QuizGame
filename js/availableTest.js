@@ -45,6 +45,7 @@ const imageLinks = {
     "Animals": "https://images.unsplash.com/photo-1517022812141-23620dba5c23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjkxNTB8MHwxfHNlYXJjaHwxfHxBbmltYWxzfGVufDB8fHx8MTY2NjA3MTk2Nw&ixlib=rb-1.2.1&q=80&w=400",
     "Vehicles": "https://images.unsplash.com/photo-1603923407797-2d25dfbbb1a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjkxNTB8MHwxfHNlYXJjaHwxfHxWZWhpY2xlc3xlbnwwfHx8fDE2NjYwNzE5Njc&ixlib=rb-1.2.1&q=80&w=400"
 }
+$(".spinner-grow").hide()
 
 // async function fetchApi(query) {
 //     const clientId = "hE7WN5evihVZ2U2yYOXhMjb-ZHb5NahT8Ml0S-Wwylo";
@@ -65,6 +66,11 @@ const imageLinks = {
 //         });
 //     return imageUrl;
 // }
+var cardDetails = {
+    testType: "",
+    name: "",
+    difficulty: "",
+}
 function testCardSkeleton(id, Name) {
     var testCardContainer = $("<div></div>")
         .addClass("testCard col-md-3 col-sm-6 hidden")
@@ -89,27 +95,9 @@ function testCardSkeleton(id, Name) {
 
     startTestBtn.click(() => {
         $("#numberOfQuestionTitle").text(Name);
-        $("input").click(() => {
-            var id = $("input[name='question']:checked").attr("id");
-            for (let e of ['a', 'b', 'c', 'd'])
-                if (e != id) { $("." + e).removeClass("bg-primary").css("color", "#fa4134"); }
-
-            $("." + id).addClass("bg-primary").css("color", "white");
-        })
-
-        $("#save").click(() => {
-            let b = $("input[name='question']:checked").val();
-            console.log(b)
-            if (isNaN(Number(b))) {
-                // $(".modal").effect("shake", { times: 4 }, 1000);
-                return
-            } else {
-                sessionStorage.setItem("numberOfQuestion", Number(b))
-
-                startCountDown(id, Name);
-            };
-        }
-        )
+        cardDetails["testType"] = id;
+        cardDetails["name"] = Name;
+        cardDetails["difficulty"] = "easy";
     });
 
     testCardsImg.append(img_avatar);
@@ -120,6 +108,74 @@ function testCardSkeleton(id, Name) {
     $(".allTestContainer").append(testCardContainer);
     // console.log(id)
 
+}
+//on save click in popup
+$("#save").click(() => {
+    var amount = Number($("input[name='question']:checked").val());
+    var difficulty = cardDetails["difficulty"]
+    var testType = cardDetails["testType"];
+    var Name = cardDetails["name"];
+    if (isNaN(amount)) {
+        // $(".modal").effect("shake", { times: 4 }, 1000);
+        return
+    } else {
+        let mcq =
+            "https://opentdb.com/api.php?amount=" +
+            amount +
+            "&category=" +
+            testType +
+            "&difficulty=" +
+            difficulty +
+            "&type=multiple";
+        fetchMcqApi(mcq).then((data) => {
+            $(".spinner-grow").hide()
+            console.log(data)
+            if (data == "") {
+                return
+            }
+            else {
+                sessionStorage.setItem("mcqData", JSON.stringify(data));
+                startCountDown(Name);
+            }
+        });
+
+    };
+}
+)
+//modal input
+$("input").click(() => {
+    var id = $("input[name='question']:checked").attr("id");
+    for (let e of ['a', 'b', 'c', 'd'])
+        if (e != id) { $("." + e).removeClass("bg-primary").css("color", "#fa4134"); }
+
+    $("." + id).addClass("bg-primary").css("color", "white");
+})
+//modal window on close
+$('.modal').on('hidden.bs.modal', function () {
+    for (let e of ['a', 'b', 'c', 'd']) {
+        $("." + e).removeClass("bg-primary").css("color", "#fa4134");
+
+    }
+    $("input[name='question']:checked").prop("checked", false)
+
+});
+//fetch api online
+async function fetchMcqApi(mcq) {
+    $(".spinner-grow").show()
+
+    const result = await fetch(mcq)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.response_code === 1) {
+
+                alert("No test available");
+                // location.href = "./index.html";
+                return ""
+            } else {
+                return data;
+            }
+        })
+    return result;
 }
 for (let key of Object.keys(testType)) {
     testCardSkeleton(
@@ -147,9 +203,9 @@ function countNum() {
         time--;
     }, 1000);
 }
-function startCountDown(testTypeId, Name) {
+function startCountDown(Name) {
     $("header").hide();
-    sessionStorage.setItem("TestType", testTypeId);
+    // sessionStorage.setItem("TestType", testTypeId);
     sessionStorage.setItem("QuizName", Name);
     sessionStorage.setItem("TestStart", true);
     $("#quesContainer").show();
