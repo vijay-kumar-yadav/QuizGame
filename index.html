@@ -30,9 +30,95 @@
     <link rel="stylesheet" href="./css/countDownStyle.css" />
   </head>
   <body>
-    <header>
+    <!-- <header>
       <small>Multiple Choice Quiz </small>
-    </header>
+    </header> -->
+    <!-- header start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light header">
+      <a class="navbar-brand logoQuiz navbarHome" href="#">
+        <img
+          src="./q.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt="logo"
+        />
+        QUIZ
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link homeNav navbarHome" href="#">Home </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li> -->
+          <!-- <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+          <li style="cursor: pointer" class="nav-item">
+            <a class="nav-link recentActivity">History</a>
+          </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" id="searchForm">
+          <input
+            class="form-control mr-sm-2"
+            id="searchBar"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+    <!-- header end here -->
+    <!-- <div class="dropdown show">
+      <a
+        class=""
+        href="#"
+        role="button"
+        id="dropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <img src="./history.png" alt="history" />
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
+    </div> -->
     <!-- <div class="space"></div> -->
     <div class="spinner-grow" role="status">
       <span class="sr-only">Loading...</span>
@@ -106,7 +192,7 @@
     </div>
 
     <div class="quesContent" id="quesContainer">
-      <div>
+      <div class="counterContainer">
         <span class="counter"></span>
       </div>
     </div>

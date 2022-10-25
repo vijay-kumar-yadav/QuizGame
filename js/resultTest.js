@@ -9,8 +9,9 @@ $(document).ready(() => {
         sessionStorage.setItem("showResult", false);
     }
 });
+var checkRecentActivity = JSON.parse(sessionStorage.getItem("checkRecentActivity"));
 function getMarks() {
-    let totalMarks = sessionStorage.getItem("totalQues");
+    // let totalMarks = sessionStorage.getItem("totalQues");
     let obtainedMarks = sessionStorage.getItem("YourScore");
     let lowMarks = Math.trunc(obtainedMarks * 0.2)
     let mediumMarks = Math.trunc(obtainedMarks * 0.6);
@@ -31,16 +32,11 @@ function getMarks() {
 
     return obtainedMarks;
 }
-$("#MarksObtained").text(() => getMarks());
-$("#MarksMax").text(sessionStorage.getItem("totalQues")).addClass("text-white");
 
 //answer attempted
-function quesSkeleton(questionNo, question, options, correctIndex) {
+function quesSkeleton(questionNo, question, options, correctIndex, answerAttempted) {
     // opt=option
     var points = 0;
-    var answerAttempted = sessionStorage
-        .getItem("answerAttempted")
-        .split(",");
     // console.log(correctIndex, answerAttempted[questionNo]);
     $("#result").attr("class", "container");
     // var tDiv = $("<div></div>").attr("id", "timerDiv");
@@ -112,19 +108,67 @@ function quesSkeleton(questionNo, question, options, correctIndex) {
 
 }
 let mcq = JSON.parse(sessionStorage.getItem("mcq"));
-var totalQues = mcq.questions.length;
+console.log(mcq);
 mcq = mcq.questions;
-// console.log(mcq);
+var totalQues = mcq.length;
+var answerAttempted;
+$("#MarksObtained").text(() => getMarks());
+$("#MarksMax").text(totalQues).addClass("text-white");
 
+if (!checkRecentActivity)
+    answerAttempted = sessionStorage
+        .getItem("answerAttempted")
+        .split(",");
+else
+    answerAttempted = sessionStorage
+        .getItem("answerAttempted");
+// console.log(mcq);
+var questionsList = []
+var optionsList = []
+var correctAnsIndexList = []
 for (let i = 0; i < totalQues; i++) {
-    quesSkeleton(i, mcq[i].question, mcq[i].answers, mcq[i].correctIndex);
+    let question = mcq[i].question;
+    let options = mcq[i].answers;
+    let correctAnsIndex = mcq[i].correctIndex;
+    quesSkeleton(i, question, options, correctAnsIndex, answerAttempted);
+    questionsList.push(question)
+    optionsList.push(options)
+    correctAnsIndexList.push(correctAnsIndex);
+    if (!checkRecentActivity) {
+        if (totalQues == (i + 1))
+            saveHistoryToLocalStorage();
+        console.log("recent ")
+    }
 }
+//saving in local storage for results history
+function saveHistoryToLocalStorage() {
+    let quizName = sessionStorage.getItem("QuizName");
+    let resultsHistory = {
+        question: questionsList,
+        options: optionsList,
+        correctAnsIndexList: correctAnsIndexList,
+        answerAttemptedList: answerAttempted,
+        quizName: quizName
+    }
+    let resultsHistoryList = localStorage.getItem("resultsHistory");
+
+    resultsHistoryList = JSON.parse(resultsHistoryList);
+    resultsHistoryList.push(resultsHistory)
+    if (resultsHistoryList.length > 10) {
+        resultsHistoryList.shift();
+    }
+    console.log(resultsHistoryList)
+    resultsHistoryList = JSON.stringify(resultsHistoryList)
+    localStorage.setItem("resultsHistory", resultsHistoryList);
+}
+
 function onHomeClick() {
     let resultArr = [];
     sessionStorage.setItem("resultShow", false);
     sessionStorage.clear();
     location.href = "./index.html";
 }
+
 
 
 //scroll animation
@@ -195,4 +239,7 @@ function pdfDown() {
     }
     // console.log(dd.content);
     pdfMake.createPdf(dd).download('' + quizName + "QuizResult");
+}
+window.onhashchange = function () {
+    alert("wait")
 }
