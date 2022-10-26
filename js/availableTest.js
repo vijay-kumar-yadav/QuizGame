@@ -1,3 +1,4 @@
+sessionStorage.setItem("checkResultHistory", true);
 // eventlistener on resize
 function resize() {
     let size = window.innerWidth;

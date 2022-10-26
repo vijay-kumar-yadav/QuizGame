@@ -1,3 +1,7 @@
+var flag = JSON.parse(sessionStorage.getItem("checkResultHistory"))
+window.onbeforeunload = function () {
+    sessionStorage.setItem("checkResultHistory", false)
+}
 $(document).ready(() => {
     if (!JSON.parse(sessionStorage.getItem("showResult"))) {
         $("body").css("filter", "blur(8px)");
@@ -134,7 +138,7 @@ for (let i = 0; i < totalQues; i++) {
     questionsList.push(question)
     optionsList.push(options)
     correctAnsIndexList.push(correctAnsIndex);
-    if (!checkRecentActivity) {
+    if (!checkRecentActivity && flag) {
         if (totalQues == (i + 1))
             saveHistoryToLocalStorage();
         console.log("recent ")

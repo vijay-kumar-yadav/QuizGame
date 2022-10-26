@@ -93,10 +93,12 @@
           $("body").css("filter", "blur(3px)");
           setTimeout(() => {
             alert("Invalid Entry");
+            sessionStorage.clear();
             location.href = "./index.html";
           }, 1000);
         } else {
           sessionStorage.setItem("showResult", true);
+          sessionStorage.setItem("TestStart", false);
         }
       });
 
