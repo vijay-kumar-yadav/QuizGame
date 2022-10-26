@@ -174,7 +174,7 @@ function testCardSkeleton(id, Name, flag) {
         startTestBtn.click(() => {
             sessionStorage.setItem("checkRecentActivity", false);
 
-            $("#numberOfQuestionTitle").text(Name);
+            $("#numberOfQuestionTitle").text(Name.replace("_", " "));
             cardDetails["testType"] = id;
             cardDetails["name"] = Name;
             cardDetails["difficulty"] = "easy";
@@ -395,12 +395,16 @@ function countNum() {
     let time = 3;
     intr = setInterval(() => {
         if (time == -1) {
-            document.location.href = "./attemptTest.html";
             clearInterval(intr);
+
+            document.location.href = "./attemptTest.html";
         }
+
         e.innerHTML = `<span>${time}</span>`;
+
         if (time == 0) {
             e.innerHTML = `<span>Go!</span>`;
+
         }
         time--;
     }, 1000);
