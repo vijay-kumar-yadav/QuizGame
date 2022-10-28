@@ -1,57 +1,69 @@
-body{
-  background-color:cadetblue;
+body {
+  background-color: cadetblue;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll; 
+  overflow-y: scroll;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: change 10s ease-in-out infinite;
+  /* position: relative; */
+}
+@keyframes change {
+  0% {
+    background-position: 0 50%;
   }
-
-
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
 body::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
+  display: none; /* for Chrome, Safari, and Opera */
 }
 label {
-    margin: 10px;
-  }
+  margin: 10px;
+}
 
+label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-  label.radio input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
+label.radio span {
+  padding: 4px;
+  border: 1px solid #00a8ff;
+  display: inline-block;
+  color: #00a8ff;
+  width: 150px;
+  height: fit-content;
+  text-align: center;
+  border-radius: 3px;
+  margin-top: 7px;
+  text-transform: uppercase;
+}
 
-  label.radio span {
-    padding: 4px;
-    border: 1px solid #00a8ff;
-    display: inline-block;
-    color: #00a8ff;
-    width: 150px;
-    height: fit-content;
-    text-align: center;
-    border-radius: 3px;
-    margin-top: 7px;
-    text-transform: uppercase;
-  }
+label.radio input:checked + span {
+  border-color: #00a8ff;
+  background-color: #00a8ff;
+  color: #fff;
+}
 
-  label.radio input:checked + span {
-    border-color: #00a8ff;
-    background-color: #00a8ff;
-    color: #fff;
-  }
+.ans {
+  margin-left: 36px !important;
+}
+#result {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  padding: 5px;
+  /* background-color: black; */
+}
 
-  .ans {
-    margin-left: 36px !important;
-  }
-  #result {
-    margin-top: 50px;
-    margin-bottom: 40px;
-    padding: 5px;
-    /* background-color: black; */
-  }
- 
-.border{
+.border {
   margin-bottom: 10px;
 }
 /* animation scroll */
@@ -69,54 +81,53 @@ label {
 /* heading */
 
 header {
-  
   text-transform: uppercase;
   color: #2dceb1;
   letter-spacing: 4px;
 
- display: flex;
+  display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #2dceb1;
-  background: #fbfbfb;
-padding: 5px 10px 5px 10px;
+  /* background: #fbfbfb; */
+  padding: 5px 10px 5px 10px;
   border-bottom: 1px solid #fbfbfb;
 }
 header small {
-  font-size: large;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
 }
-.pdfFile
-{
-  height: 30px; width: 30px;
+.pdfFile {
+  height: 30px;
+  width: 30px;
   /* border: 2px solid #b9b5b5; */
-cursor: pointer;
-  
-
+  cursor: pointer;
 }
 /* .fullscreenToggleBtn:hover{
   height: 35px; width: 35px;
   transition: all  linear;
 } */
-.quitBtn{
-  height: 30px; width: 30px;
-cursor: pointer;
+.quitBtn {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
   /* border: 2px solid #b9b5b5; */
-
 }
 
 .sticky {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index:1;
+  z-index: 1;
 }
 
 .obtainedMarksDiv {
   display: flex;
   justify-content: center;
 }
-.obtainedMarksDiv div{
-  background-color:rgb(216, 186, 129);
+.obtainedMarksDiv div {
+  background-color: rgb(216, 186, 129);
   border-radius: 10px;
-  
+
   padding: 5px;
 }

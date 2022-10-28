@@ -304,7 +304,7 @@ async function fetchMcqApi(mcq) {
         .then((data) => {
             if (data.response_code === 1) {
                 alert("No test available");
-                location.href = "./index.html";
+                // location.href = "./index.html";
                 return ""
             } else {
                 return data;
@@ -343,7 +343,9 @@ function callQuizSpread(testType, flag) {
 }
 $(".navbarHome").click(
     () => {
-        console.log("hello")
+        $(".navbarHome").addClass("active");
+        $(".recentActivity").removeClass("active");
+        // console.log("hello")
         testTypeSearch = { ...testType }
         callQuizSpread(testType, true)
 
@@ -351,7 +353,8 @@ $(".navbarHome").click(
 )
 $(".recentActivity").click(
     () => {
-
+        $(".recentActivity").addClass("active");
+        $(".navbarHome").removeClass("active");
         let list = getHistoryQuizList()
         var set = new Set(list);
         var orgList = [...list];

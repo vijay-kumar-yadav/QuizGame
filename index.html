@@ -33,8 +33,12 @@
     <!-- <header>
       <small>Multiple Choice Quiz </small>
     </header> -->
+
     <!-- header start -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light header">
+    <nav
+      class="navbar navbar-expand-lg navbar-light header"
+      style="background-color: #e3f2fd; z-index: 1"
+    >
       <a class="navbar-brand logoQuiz navbarHome" href="#">
         <img
           src="./q.png"
@@ -60,12 +64,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link homeNav navbarHome" href="#">Home </a>
+            <a class="nav-link homeNav navbarHome active" href="#">Home </a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li> -->
-          <!-- <li class="nav-item dropdown">
+          <li style="cursor: pointer" class="nav-item">
+            <a class="nav-link recentActivity">History</a>
+          </li>
+          <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -75,17 +82,14 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Dropdown
+              More Games
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">The Hangman Game</a>
+              <!-- <a class="dropdown-item" href="#">Another action</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Something else here</a> -->
             </div>
-          </li> -->
-          <li style="cursor: pointer" class="nav-item">
-            <a class="nav-link recentActivity">History</a>
           </li>
         </ul>
 
@@ -103,23 +107,7 @@
         </form>
       </div>
     </nav>
-    <!-- header end here -->
-    <!-- <div class="dropdown show">
-      <a
-        class=""
-        href="#"
-        role="button"
-        id="dropdownMenuLink"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <img src="./history.png" alt="history" />
-      </a>
 
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
-    </div> -->
-    <!-- <div class="space"></div> -->
     <div class="spinner-grow" role="status">
       <span class="sr-only">Loading...</span>
     </div>
@@ -187,6 +175,7 @@
       </div>
     </div>
     <!-- model window end -->
+
     <div class="d-flex justify-content-center">
       <div class="row container allTestContainer" id="allTestContainer"></div>
     </div>
