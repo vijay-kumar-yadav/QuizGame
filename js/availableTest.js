@@ -397,13 +397,15 @@ function countNum() {
     let e = document.querySelector(".counter");
     let time = 3;
     intr = setInterval(() => {
-        if (time == -1) {
+        if (time <= -1) {
             clearInterval(intr);
 
             document.location.href = "./attemptTest.html";
         }
+        else {
 
-        e.innerHTML = `<span>${time}</span>`;
+            e.innerHTML = `<span>${time}</span>`;
+        }
 
         if (time == 0) {
             e.innerHTML = `<span>Go!</span>`;
