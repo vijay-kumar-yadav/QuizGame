@@ -7,14 +7,11 @@
 }
 
 body {
-  /* background-color: cadetblue; */
+  overflow: hidden;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  /* background-size: 400% 400%; */
   animation: change 10s ease-in-out infinite;
-  /* position: relative; */
 }
 @keyframes change {
   0% {
@@ -172,4 +169,27 @@ header small {
 /* animate new box */
 .border {
   animation: append-animate 0.5s linear;
+}
+
+/* animate progress bar */
+.progressBar {
+  position: relative;
+  border: 1px solid white;
+  width: 100%;
+}
+.progressBarRace {
+  background-color: #9b9b9e86;
+  /* change this */
+  width: 0%;
+  height: 20px;
+  transition: all 1s ease;
+}
+.racingCar {
+  position: absolute;
+  top: -15px;
+  /* change this */
+  left: 0%;
+  width: 40px;
+  height: 50px;
+  transition: all 1s ease;
 }

@@ -1,5 +1,5 @@
 var unLoadFlag = true;
-
+var total = 0;
 $(document).ready(() => {
     if (!JSON.parse(sessionStorage.getItem("TestStart"))) {
         $("body").css("filter", "blur(3px)");
@@ -28,7 +28,18 @@ var result = {};
 //   difficulty +
 //   "&type=multiple";
 // console.log(mcq);
+function setProgressBarPropety(quesNumber) {
+
+    total = ((quesNumber) / totalQues) * 100
+    $(".racingCar").css("left", "" + (total) + "%");
+    $(".progressBarRace").width("" + (total) + "%");
+    console.log(total)
+    if (quesNumber == totalQues) {
+        $(".racingCar").attr("src", "./images/wonRace.png").css("left", "50%").css("top", "-22px").css("height", "35px").css("width", "55px")
+    }
+}
 function quesSkeleton(questionNo, question, options) {
+
     // opt=option
     // <div class="timer">
     //         <div class="time_left_txt">Time Left</div>
@@ -76,6 +87,10 @@ function quesSkeleton(questionNo, question, options) {
         .css("min-height", "35vh")
         .css("min-width", "80vw")
         .addClass(" p-3 border-bottom bg-white");
+    //running man progress bar animation here
+
+    setProgressBarPropety(questionNo + 1)
+    //ends here
     var qDiv = $("<div></div>")
         .attr("id", "quesDiv")
         .addClass("d-flex flex-row  align-items-center question-title");
@@ -128,7 +143,7 @@ function quesSkeleton(questionNo, question, options) {
     //     Next
     //   </button>
     // </div>
-    var nextBtnDiv = $("<div></div>").attr(
+    var nextSubmitBtnDiv = $("<div></div>").attr(
         "class",
         "d-flex justify-content-between"
     );
@@ -142,10 +157,15 @@ function quesSkeleton(questionNo, question, options) {
         .css("border-radius", "10px")
         .click(() => onSubmitClick())
         .text("Submit");
-    nextBtnDiv.append(submitBtn, nextBtn);
-    qaDiv.append(qDiv, aDiv, nextBtnDiv);
+    if ((questionNo + 1) == totalQues) {
+        nextBtn.hide()
+    }
+    nextSubmitBtnDiv.append(submitBtn, nextBtn);
+
+    qaDiv.append(qDiv, aDiv, nextSubmitBtnDiv);
     bDiv.append(quizDiv, qaDiv);
     $("#quiz").append(bDiv);
+
 }
 //slideshow
 var intr;
