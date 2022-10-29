@@ -439,11 +439,11 @@ function onRequestFullScreenClick() {
 
 window.addEventListener("resize", (evt) => {
     if (window.innerHeight == screen.height) {
-        $(".fullscreenToggleBtn").attr("src", "./fullscreen_off.png");
+        $(".fullscreenToggleBtn").attr("src", "./images/fullscreen_off.png");
 
         console.log("FULL SCREEN");
     } else {
-        $(".fullscreenToggleBtn").attr("src", "./fullscreen.png");
+        $(".fullscreenToggleBtn").attr("src", "./images/fullscreen.png");
         console.log("NORMAL SCREEN");
     }
 });
