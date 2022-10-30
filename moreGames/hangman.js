@@ -111,7 +111,7 @@ function windowGAME(select) {
         zoneA.append(btn);
     }
     $(".alphabets").append(zoneA);
-    $("#chanceLeftP").text("Left Guess : " + 7);
+    $("#chanceLeftP").text("Left Guess : " + 6);
     console.log("win " + winCount + " total " + totalCount);
     $(".wonCount").text(winCount + " / " + totalCount);
     $(".hide").hide()
@@ -129,9 +129,10 @@ var imageIndex = 1;
 var aleadyGuessInput = [];
 function resetGameWindow() {
     imageIndex = 1;
+    setHangmanImage(imageIndex);
+    imageIndex = 2;
     inputLetterCount = 0;
     aleadyGuessInput = []
-    setHangmanImage(imageIndex);
     $(".guessDiv").remove();
     $(".zoneA").remove();
     windowGAME(select);
@@ -151,7 +152,7 @@ function keyPress(e) {
             (e.keyCode >= 97 && e.keyCode <= 122)
         )
             aleadyGuessInput.push(e.key);
-        console.log("-->" + String.fromCharCode(eval(e.keyCode + 32)));
+        // console.log("-->" + String.fromCharCode(eval(e.keyCode + 32)));
         if (word.includes(e.key) || word.includes("" + String.fromCharCode(eval(e.keyCode + 32)))) {
             // console.log(e.key, e);
 
@@ -202,10 +203,10 @@ function keyPress(e) {
             console.log(imageIndex)
             setHangmanImage(imageIndex);
 
-            $("#chanceLeftP").text("Left Guess : " + eval(6 - imageIndex));
+            $("#chanceLeftP").text("Left Guess : " + eval(7 - imageIndex));
             imageIndex++;
 
-            if (imageIndex == 8) {
+            if (imageIndex >= 8) {
                 $(".hide").show();
 
                 document.getElementById("result-text").innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${word}</span></p>`;
