@@ -225,6 +225,7 @@ function submitQuizResult() {
     unLoadFlag = false;
     $(".quitSubmit").remove();
     $("header").hide();
+    $(".racingCar").hide();
     let resultArr = [];
     for (let key in result) resultArr.push(result[key]);
     var correctAnswers = [];
@@ -241,6 +242,8 @@ function submitQuizResult() {
     clearInterval(intr);
     sessionStorage.setItem("TestStart", false);
     $("#quiz").hide();
+    $(".racingCar").hide();
+
     $(".alert").addClass("alert-primary");
 
     alertMessage("Calculating your result wait", 2800);

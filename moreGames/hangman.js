@@ -125,7 +125,7 @@ function windowGAME(select) {
 
 }
 
-var imageIndex = 2;
+var imageIndex = 1;
 var aleadyGuessInput = [];
 function resetGameWindow() {
     imageIndex = 1;
@@ -144,7 +144,7 @@ function keyPress(e) {
     if (aleadyGuessInput.includes(e.key.toLowerCase()))
         return;
     if ($(' .guessDiv').length) {
-        $("#" + (e.key.toUpperCase())).attr("disabled", true);
+        $("#" + (e.key.toUpperCase())).attr("disabled", true).css("text-decoration", "line-through");
         // alphabet input
         if (
             (e.keyCode >= 65 && e.keyCode <= 90) ||
@@ -199,11 +199,11 @@ function keyPress(e) {
             (e.keyCode >= 65 && e.keyCode <= 90) ||
             (e.keyCode >= 97 && e.keyCode <= 122)
         ) {
+            console.log(imageIndex)
             setHangmanImage(imageIndex);
 
-            $("#chanceLeftP").text("Left Guess : " + eval(7 - imageIndex));
+            $("#chanceLeftP").text("Left Guess : " + eval(6 - imageIndex));
             imageIndex++;
-            console.log(imageIndex)
 
             if (imageIndex == 8) {
                 $(".hide").show();

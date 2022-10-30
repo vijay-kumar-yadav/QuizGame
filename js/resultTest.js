@@ -47,7 +47,7 @@ function quesSkeleton(questionNo, question, options, correctIndex, answerAttempt
     // var tP = $("<h2></h2>").attr("id", "timer").addClass(" text-center");
     // tDiv.append(tP);
     var bDiv = $("<div></div")
-        .addClass("border hidden")
+        .addClass("border ")
         .attr("id", "border" + questionNo).css("border-top-right-radius", "50px");
     var bgColor = "bg-info";
     if (answerAttempted[questionNo] == correctIndex) {
@@ -181,7 +181,6 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         // console.log(entry);
         if (entry.isIntersecting) {
-            console.log("inside");
             entry.target.classList.add("show");
         } else {
             entry.target.classList.remove("show");

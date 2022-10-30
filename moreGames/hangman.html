@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hangman</title>
+    <link rel="icon" type="image/x-icon" href="./images/hangmanLogo.png" />
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -83,7 +85,8 @@
               <label for="input3" class="text-left"> JAVASCRIPT </label>
             </div>
             <div class="d-flex justify-content-center mt-3">
-              <button class="btn start">Start Game</button>
+              <button class="btn home bg-danger mr-1">Home</button>
+              <button class="btn start bg-primary ml-1">Start Game</button>
             </div>
           </div>
           <!-- Game window -->
@@ -106,13 +109,13 @@
             <!-- result  -->
             <div id="new-game-container" class="new-game-popup hide">
               <div id="result-text"></div>
-              <button id="new-game-button" class="bg-primary">New Game</button>
+              <button id="new-game-button" class="btn bg-primary newGame">
+                New Game
+              </button>
+              <button class="btn bg-secondary mt-1 back">Back</button>
             </div>
             <!-- result end -->
-            <div class="d-flex justify-content-center p-2">
-              <button class="btn back mr-1">Back</button>
-              <button class="btn home bg-danger ml-1">Home</button>
-            </div>
+            <!-- <div class="d-flex justify-content-center p-2"></div> -->
           </div>
         </div>
         <div id="scoreBoard">
