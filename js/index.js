@@ -316,8 +316,8 @@ async function fetchMcqApi(mcq) {
             }
         }).catch((err) => {
             $(".spinner-grow").hide();
-            console.log(err)
-            alert("Request timeout please try again ...");
+            console.log(err.message)
+            alert("Request timeout please try again ...\n" + "Error: " + err.message);
             return ""
         }
         )
@@ -352,8 +352,12 @@ function callQuizSpread(testType, flag) {
     hiddenElements.forEach((el) => observer.observe(el));
 
 }
+$("#hangMan").click(() => {
+    $("#searchBar").val("");
+})
 $(".navbarHome").click(
     () => {
+        $("#searchBar").val("");
         $(".navbarHome").addClass("active");
         $(".recentActivity").removeClass("active");
         // console.log("hello")
@@ -364,6 +368,7 @@ $(".navbarHome").click(
 )
 $(".recentActivity").click(
     () => {
+        $("#searchBar").val("");
         $(".recentActivity").addClass("active");
         $(".navbarHome").removeClass("active");
         let list = getHistoryQuizList()
