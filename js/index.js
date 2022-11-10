@@ -266,8 +266,9 @@ $("#save").click(() => {
             difficulty +
             "&type=multiple";
         fetchMcqApi(mcq).then((data) => {
+            console.log(data)
             $(".spinner-grow").hide()
-            if (data == "") {
+            if (data == "" || data == undefined) {
                 return
             }
             else {
@@ -299,9 +300,13 @@ $('.modal').on('hidden.bs.modal', function () {
 //fetch api online
 async function fetchMcqApi(mcq) {
     $(".spinner-grow").show()
-    const result = await fetch(mcq)
-        .then((response) => response.json())
+    //request time out for slow internet
+    const controller = new AbortController();
+    const timeOut = setTimeout(() => controller.abort(), 10000)
+    const result = await fetch(mcq, { signal: controller.signal })
+        .then((response) => { clearTimeout(timeOut); return response.json() })
         .then((data) => {
+
             if (data.response_code === 1) {
                 alert("No test available");
                 // location.href = "./index.html";
@@ -309,7 +314,13 @@ async function fetchMcqApi(mcq) {
             } else {
                 return data;
             }
-        })
+        }).catch((err) => {
+            $(".spinner-grow").hide();
+            console.log(err)
+            alert("Request timeout please try again ...");
+            return ""
+        }
+        )
     return result;
 }
 //code start from here
