@@ -28,6 +28,7 @@ $(".home").click(() => {
 
 })
 $(".back").click(() => {
+    $(".wonCount").text(winCount + " / " + totalCount);
     $(".startWindow").show();
     $(".gameWindow").hide();
     // $(".guessDiv").remove();
@@ -187,6 +188,7 @@ function keyPress(e) {
                 if (inputLetterCount == word.length) {
                     console.log("won");
                     $(".hide").show()
+                    $(".wonCount").text(winCount + " / " + totalCount);
                     document.getElementById("result-text").innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${word}</span></p>`;
                     winCount++;
                     totalCount++;
